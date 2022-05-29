@@ -26,6 +26,8 @@ async function filterPullRequests(github, context, prs) {
     const outdated = await isOutdated(github, context, pr.number)
     if (outdated) {
       targetPrs.push(pr)
+    } else {
+      console.log(`#${pr.number} is already up-to-date`)
     }
   }
   return targetPrs
