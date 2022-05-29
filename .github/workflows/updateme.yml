@@ -1,0 +1,21 @@
+name: Update Me
+
+on:
+  repository_dispatch:
+    types: [update-branches]
+
+jobs:
+  update-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/github-script@v6
+        env:
+          labels: "update-me" # comma separated
+          dryRun: false
+          baseBranch: "master"
+          limit: 100 # max 100
+        with:
+          script: |
+            const script = require('.github/workflows/updateme/script.js')
+            await script({github, context})

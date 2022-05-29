@@ -1,0 +1,16 @@
+name: Repository Dispatch
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  repository-dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          # `repo` scope TOKEN
+          token: ${{ secrets.PERSONAL_ACTIONS_TOKEN }}
+          event-type: update-branches
