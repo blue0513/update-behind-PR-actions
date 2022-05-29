@@ -13,7 +13,7 @@ jobs:
         env:
           labels: "update-me" # comma separated
           dryRun: false
-          baseBranch: "master"
+          baseBranch: "main"
           limit: 100 # max 100
         with:
           script: |
