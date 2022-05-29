@@ -2,7 +2,7 @@ name: On Base Merge
 
 on:
   push:
-    branches: [master] # base branch
+    branches: [main] # base branch
 
 jobs:
   on-base-merge:
