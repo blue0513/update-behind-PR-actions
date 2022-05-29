@@ -1,11 +1,11 @@
-name: Repository Dispatch
+name: On Base Merge
 
 on:
   push:
-    branches: [master]
+    branches: [master] # base branch
 
 jobs:
-  repository-dispatch:
+  on-base-merge:
     runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch

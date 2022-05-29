@@ -17,5 +17,5 @@ jobs:
           limit: 100 # max 100
         with:
           script: |
-            const script = require('.github/workflows/updateme/script.js')
+            const script = require('.github/workflows/update_me/update-pr.js')
             await script({github, context})
