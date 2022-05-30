@@ -18,7 +18,7 @@ async function filterPullRequests(github, context, prs) {
     if (pr.labels.length === 0) return false
 
     const allLabels = pr.labels.concat(targetLabels)
-    return new Set(allLabels).size != allLabels.size
+    return new Set(allLabels).size != allLabels.length
   })
 
   let targetPrs = []
@@ -34,6 +34,7 @@ async function filterPullRequests(github, context, prs) {
 }
 
 async function isOutdated(github, context, prNumber) {
+  const { baseBranch } = process.env
   const pr = (await github.rest.pulls.get({
     owner: context.repo.owner,
     repo: context.repo.repo,
@@ -42,7 +43,7 @@ async function isOutdated(github, context, prNumber) {
   const res = (await github.rest.repos.compareCommitsWithBasehead({
     owner: context.repo.owner,
     repo: context.repo.repo,
-    basehead: `${pr.base.sha}...${pr.head.sha}`
+    basehead: `${baseBranch}...${pr.head.sha}`
   })).data
 
   /* https://github.com/palantir/bulldozer/blob/develop/bulldozer/update.go#L50-L53 */
@@ -72,7 +73,10 @@ async function main(github, context) {
 
   const { dryRun } = process.env
   if (!(dryRun.toLowerCase() === "true")) {
+    console.log("Updating......")
     await updateBranches(github, context, prNumbers)
+  } else {
+    console.log("DryRun: wont update")
   }
 }
 
