@@ -10,3 +10,5 @@ Sample workflows to update PRs when base branch is updated
 
 - Label control
 - DryRun option
+
+It is sample PR
